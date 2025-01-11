@@ -1,0 +1,381 @@
+:root {
+  --checkbox-size: 16px;
+  --check-arrow-size: 14px;
+
+  --radio-size: 16px;
+  --radio-circle-size: 12px;
+
+  --select-arrow: 13px;
+}
+
+body {
+  .content {
+    .content__body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+
+      h1 {
+        font-size: 45px;
+        font-weight: 600;
+      }
+
+      .elements {
+        margin-top: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        // checkbox
+        .checkbox-div {
+          position: relative;
+          margin-bottom: 20px;
+
+          .checkbox__input {
+            cursor: pointer;
+            -webkit-appearance: none;
+            appearance: none;
+
+            position: absolute;
+
+            &:checked + .checkbox__label::before {
+              // checkbox__label має знаходитися після checkbox__input
+              background-color: rgb(225, 0, 255); // так міняти фон чекбокса
+              border: 1px solid rgb(225, 0, 255);
+            }
+
+            &:checked + .checkbox__label::after {
+              opacity: 1; // показую галочку
+            }
+          }
+
+          .checkbox__label {
+            cursor: pointer;
+
+            color: teal;
+            font-size: 20px;
+            font-weight: 600;
+            padding-left: 23px;
+
+            &::before {
+              // малюю чекбокс
+              content: "";
+              display: block;
+              width: var(--checkbox-size);
+              height: var(--checkbox-size);
+              border: 1px solid #ccc;
+              background-color: #fff;
+              border-radius: 3px;
+
+              position: absolute;
+              z-index: 1;
+              top: 50%;
+              transform: translateY(-50%);
+            }
+
+            &::after {
+              // малюю галочку
+              content: "";
+              display: block;
+              width: var(--check-arrow-size);
+              height: var(--check-arrow-size);
+              background: url("../img/check.svg") no-repeat; // поміняй fill у файлі svg та рефрешни
+              //   fill: red; // тут не працює
+              background-size: var(--check-arrow-size) var(--check-arrow-size);
+
+              position: absolute;
+              z-index: 2;
+              top: 50%;
+              transform: translateY(-50%);
+              left: calc(
+                (var(--checkbox-size) / 2) - (var(--check-arrow-size) / 2)
+              );
+
+              opacity: 0; // приховав стрілочку
+            }
+          }
+        }
+
+        // checkbox end
+
+        // radio
+        .wrap-radio-btns {
+          margin-bottom: 50px;
+
+          .radio-div {
+            position: relative;
+
+            .radio__input {
+              -webkit-appearance: none;
+              appearance: none;
+              position: absolute;
+
+              &:checked + .radio__label::before {
+                border-color: teal;
+              }
+
+              &:checked + .radio__label::after {
+                opacity: 1;
+              }
+            }
+
+            .radio__label {
+              color: teal;
+              font-size: 20px;
+              font-weight: 600;
+              padding-left: 23px;
+
+              &::before {
+                // малюю кружечок
+                content: "";
+                position: absolute;
+                display: block;
+                width: var(--radio-size);
+                height: var(--radio-size);
+                background-color: #ffffff;
+                border: 1px solid #ccc;
+                border-radius: 50%;
+                top: 50%;
+                transform: translateY(-50%);
+                left: 0;
+                z-index: 1;
+              }
+
+              &::after {
+                // малюю кольорове коло в радіо баттоні =)
+                content: "";
+                display: block;
+                width: var(--radio-circle-size);
+                height: var(--radio-circle-size);
+                background-color: teal;
+                border-radius: 50%;
+                z-index: 2;
+
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                left: calc(
+                  (var(--radio-size) / 2) - (var(--radio-circle-size) / 2)
+                );
+                opacity: 0;
+              }
+            }
+          }
+        }
+
+        // radio end
+
+        // select
+        .wrap-select {
+          position: relative;
+          display: inline-block;
+          width: 300px;
+
+          &::after {
+            // малюю стрілочку
+            content: "";
+            display: block;
+            background: url("../img/dropdown_icon.svg") no-repeat; // поміняй fill у файлі svg та рефрешни
+
+            width: var(--select-arrow);
+            height: var(--select-arrow);
+            rotate: 90deg;
+
+            position: absolute;
+            top: 50%;
+            transform: translateX(-50%); // X, бо я шаманю із rotate: 90deg;
+            right: 20px;
+
+            pointer-events: none; // дуже важливо!!! ми не зможемо відкрити меню без цього
+            cursor: pointer;
+          }
+
+          select {
+            width: 100%;
+            cursor: pointer;
+            -webkit-appearance: none;
+            appearance: none;
+            background: none;
+
+            padding: 10px 40px 10px 10px;
+            border: 1px solid orange;
+            border-radius: 3px;
+            font-family: inherit;
+            font-size: 20px;
+            color: teal;
+
+            &:focus {
+              outline: 0;
+              border: 2px solid rgb(57, 205, 75);
+            }
+
+            option {
+              // НЕ МОЖНА ЗМІНЮВАТИ, НІЧОГО НЕ ПОЛУЧИТЬСЯ БО ЦЕ ЗАЛЕЖИТЬ ВІД OS,
+              // КРАЩЕ ЗРОБИТИ СВІЙ !!!
+            }
+          }
+        }
+        // select end
+      }
+    }
+  }
+
+  // це допоможе вирішити проблеми в Mozilla
+  @-moz-document url-prefix() {
+    .content {
+      .content__body {
+        h1 {
+        }
+
+        .elements {
+          // checkbox
+          .checkbox-div {
+            .checkbox__input {
+              &:checked + .checkbox__label::before {
+              }
+
+              &:checked + .checkbox__label::after {
+              }
+            }
+
+            .checkbox__label {
+              &::before {
+                top: calc(50% - 2px);
+              }
+
+              &::after {
+                top: calc(50% - 2px);
+              }
+            }
+          }
+
+          // checkbox end
+
+          // radio
+          .wrap-radio-btns {
+            .radio-div {
+              .radio__input {
+                &:checked + .radio__label::before {
+                }
+
+                &:checked + .radio__label::after {
+                }
+              }
+
+              .radio__label {
+                &::before {
+                  top: calc(50% - 2px);
+                }
+
+                &::after {
+                  content: "";
+
+                  top: calc(50% - 2px);
+                }
+              }
+            }
+          }
+
+          // radio end
+
+          // select
+          .wrap-select {
+            &::after {
+              // малюю стрілочку
+
+              top: calc(50% - 2px);
+            }
+
+            select {
+              &:focus {
+              }
+            }
+          }
+          // select end
+        }
+      }
+    }
+  }
+
+  // це допоможе вирішити проблеми в Safari
+
+  @supports (hanging-punctuation: first) and (font: -apple-system-body) and
+    (-webkit-appearance: none) {
+    .content {
+      .content__body {
+        h1 {
+        }
+
+        .elements {
+          // checkbox
+          .checkbox-div {
+            .checkbox__input {
+              &:checked + .checkbox__label::before {
+              }
+
+              &:checked + .checkbox__label::after {
+              }
+            }
+
+            .checkbox__label {
+              &::before {
+                top: calc(50% - 1px);
+                // top: 100px;
+              }
+
+              &::after {
+                top: calc(50% - 1px);
+              }
+            }
+          }
+
+          // checkbox end
+
+          // radio
+          .wrap-radio-btns {
+            .radio-div {
+              .radio__input {
+                &:checked + .radio__label::before {
+                }
+
+                &:checked + .radio__label::after {
+                }
+              }
+
+              .radio__label {
+                &::before {
+                  top: calc(50% - 1px);
+                }
+
+                &::after {
+                  content: "";
+
+                  top: calc(50% - 1px);
+                }
+              }
+            }
+          }
+
+          // radio end
+
+          // select
+          .wrap-select {
+            &::after {
+              // малюю стрілочку
+
+              top: calc(50% - 1px);
+            }
+
+            select {
+              &:focus {
+              }
+            }
+          }
+          // select end
+        }
+      }
+    }
+  }
+}
