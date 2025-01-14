@@ -9,6 +9,8 @@
 }
 
 body {
+  // background-color: rgb(95, 140, 160);
+
   .content {
     .content__body {
       display: flex;
@@ -375,6 +377,69 @@ body {
           }
           // select end
         }
+      }
+    }
+  }
+
+  .wrap-horizontal {
+    display: flex;
+    max-width: 700px;
+    padding: 10px;
+    background-color: pink;
+    margin: 100px auto;
+
+    .horizontal-scroll-box {
+      max-width: 900px;
+      background-color: beige;
+      padding: 20px;
+      border: 2px solid red;
+      overflow: auto;
+
+      display: flex;
+
+      // так можна застилізувати скрол для хрому і сафарі
+      /////////////////////////////////////
+      //////////////////////////////////
+      max-height: 300px; // Задаємо максимальну висоту
+      overflow-y: auto; // Увімкнення вертикального скролу
+
+      // Стилізація самого скролу
+      &::-webkit-scrollbar {
+        width: 8px; // Ширина вертикального скролу
+        height: 8px; // Висота горизонтального скролу
+      }
+
+      // Стилізація доріжки (фон під скролом)
+      &::-webkit-scrollbar-track {
+        background-color: #f0f0f0;
+        border-radius: 4px;
+      }
+
+      // Стилізація повзунка (сам скрол)
+      &::-webkit-scrollbar-thumb {
+        background-color: #888; // Колір повзунка
+        border-radius: 4px;
+        &:hover {
+          background-color: #555; // Колір при наведенні
+        }
+      }
+
+      // Стилізація кута, де горизонтальний і вертикальний скрол перетинаються
+      &::-webkit-scrollbar-corner {
+        background-color: transparent;
+      }
+
+      // так можна застилізувати скрол для Firefox
+      /////////////////////////////////////
+      //////////////////////////////////
+      /* Стилізація скролу для Firefox */
+      scrollbar-width: thin; /* Варіанти: auto, thin, none */
+      scrollbar-color: rgba(0, 0, 0, 0.5) rgba(0, 0, 0, 0.1); /* Повзунок і фон */
+
+      .horizontal__item {
+        width: 100px;
+        padding: 20px;
+        background-color: aquamarine;
       }
     }
   }
